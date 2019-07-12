@@ -4,7 +4,7 @@ import { Navbar, Nav } from "react-bootstrap";
 export default function Header(){
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand href="#home">Fortnite API</Navbar.Brand>
+      <Navbar.Brand href="/">Fortnite API</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
@@ -18,6 +18,6 @@ export default function Header(){
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
-    </Navbar>
+    </Navbar>    
   );
 };
