@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './Components/Header';
 import Home from './Routes/Home';
@@ -18,8 +18,12 @@ import { UserProvider } from './Components/Context/index';
  */
 function App() {
   const [results, setResults] = useState([]);
-  // const [show, setShow] = useState(true); //! Hook to set up fade out on page switch.
+  const [value, setValue] = React.useState(0);
   const upcoming = `https://fortnite-api.theapinetwork.com/upcoming/get?authorization=${authToken}`;
+
+  useEffect(() => {
+    callApi(upcoming);
+  }, [upcoming])
   
   const callApi = (url) => {
     axios
@@ -34,13 +38,15 @@ function App() {
             results: results,
             callApi: callApi,
             upcoming: upcoming,
+            value: value,
+            setValue: setValue
           }}>
             <div className="App">
               <Header /> 
               <HomeJumbotron /> 
               <TabLinks /> 
               <Route exact path='/' component={Home} />
-              <Route exact path='/upcoming' component={Upcoming} />
+              <Route exact path='/upcoming' render={() => results.length === 0 ? callApi(upcoming) : <Upcoming />} />
             </div> 
           </UserProvider>
       </Switch>

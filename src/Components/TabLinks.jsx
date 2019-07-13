@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { withRouter } from "react-router-dom";
+import UserContext from "../Components/Context/index";
 
 // Styles from Material-UI
 const useStyles = makeStyles({
@@ -16,10 +17,14 @@ const useStyles = makeStyles({
  * Centered tabs, will display on all routes.
  * TODO: Create links for each tab.
  * TODO: Change width of tab bar when on mobile screen (< 380)
+ * TODO: Make sure when page reloads the tab is selected on the correct page. 
+ *   ! important
  */
 function TabLinks(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const state = useContext(UserContext);
+  const { value, setValue } = state;
+  // const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -31,6 +36,7 @@ function TabLinks(props) {
 
   return (
     <div className={classes.root}>
+      
       <Tabs
         value={value}
         onChange={handleChange}
