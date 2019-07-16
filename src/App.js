@@ -18,7 +18,9 @@ import { UserProvider } from './Components/Context/index';
  */
 function App() {
   const [results, setResults] = useState([]);
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [modalImage, setModalImage] = useState("");
   const upcoming = `https://fortnite-api.theapinetwork.com/upcoming/get?authorization=${authToken}`;
 
   useEffect(() => {
@@ -31,6 +33,16 @@ function App() {
         .then( val => setResults(val))
   }
 
+  const handleOpen = (image) => {
+    setOpen(true);
+    setModalImage(image);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setModalImage("");
+  };
+
   return (
     <HashRouter>
       <Switch>
@@ -39,7 +51,12 @@ function App() {
             callApi: callApi,
             upcoming: upcoming,
             value: value,
-            setValue: setValue
+            setValue: setValue,
+            open: open,
+            setOpen: setOpen,
+            handleOpen: handleOpen,
+            handleClose: handleClose,
+            modalImage: modalImage
           }}>
             <div className="App">
               <Header /> 

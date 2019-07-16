@@ -2,7 +2,6 @@ import React from "react";
 import { Paper, makeStyles } from "@material-ui/core";
 import Fade from "react-reveal/Fade";
 import $ from "jquery";
-// import UserContext from "../Components/Context/index";
 
 const useStyles = makeStyles(theme => ({
   media: {
@@ -22,10 +21,8 @@ const useStyles = makeStyles(theme => ({
  */
 export default function Home() {
   const classes = useStyles();
-  // const state = useContext(UserContext);
   
   return (
-    
       <div style={{marginTop: "40px"}}>
           <Fade right>
             <div style={{ display: "flex", justifyContent: "center" }}>

@@ -24,7 +24,6 @@ function TabLinks(props) {
   const classes = useStyles();
   const state = useContext(UserContext);
   const { value, setValue } = state;
-  // const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
