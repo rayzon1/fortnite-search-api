@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import UserContext from "../Components/Context/index";
+import UserContext from "./Context/index";
 import Flip from "react-reveal/Flip";
-import ModalScreen from "../Components/ModalScreen";
+import ModalScreen from "./ModalScreen";
+
 
 const style = {
   container: {
@@ -15,14 +16,15 @@ const style = {
   }
 };
 
-// TODO: Switch userContext from this component to Upcoming component.
-// TODO: Use refs to toggle current style on selected image.
-
-export default function Results() {
+/**
+ * Component to render results in the Upcoming route.
+ * Will map images to grid with clickable results to bring up front a more detailed
+ * description of the clicked item from api.
+ */
+export default function UpcomingResults() {
   const state = useContext(UserContext);
   const { results, setValue, handleOpen } = state;
-  const itemIds = results.data.data.map(val => val.itemId);
-
+ 
   useEffect(() => {
     setValue(1);
   }, [setValue]);
@@ -39,11 +41,10 @@ export default function Results() {
     <Grid container direction="row" justify="center" alignItems="center">
       <ModalScreen />
       {results.data.data.map(val => (
-        <Flip right>
+        <Flip right key={val.itemId}>
           <div style={style.container}>
             <img
               src={val.item.images.icon}
-              key={val.itemId}
               alt="icons"
               style={style.images}
               onMouseDown={() => mouseDown(val.itemId)}
