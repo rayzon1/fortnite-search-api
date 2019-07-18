@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
+import { Grid, Paper } from "@material-ui/core";
 import UserContext from "./Context/index";
 import Flip from "react-reveal/Flip";
 import ModalScreen from "./ModalScreen";
@@ -13,7 +13,25 @@ const style = {
   images: {
     width: "12rem",
     height: "12rem",
-  }
+  },
+  paper: {
+    width: "55%",
+    height: "50%",
+  },
+  modalImages:{
+    width: "20rem",
+    height: "20rem",
+  },
+  modalPaper:{
+    width: "20rem",
+    height: "20rem",
+    position: "absolute",
+    bottom: "30vh",
+    right: "42vw",
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center"  
+  }    
 };
 
 /**
@@ -37,24 +55,40 @@ export default function UpcomingResults() {
     results[key].parentNode.style.boxShadow = "5px 10px 8px #888888";
   };
 
+  const imageModal = (modalImage) => {
+    return (
+      <Paper style={style.modalPaper}>
+        <img src={modalImage} style={style.modalImages} alt="modal" />
+      </Paper>
+    )
+  }
+
   return (
-    <Grid container direction="row" justify="center" alignItems="center">
-      <ModalScreen />
-      {results.data.data.map(val => (
-        <Flip right key={val.itemId}>
-          <div style={style.container}>
-            <img
-              src={val.item.images.icon}
-              alt="icons"
-              style={style.images}
-              onMouseDown={() => mouseDown(val.itemId)}
-              onMouseUp={() => mouseUp(val.itemId)}
-              ref={ref => (results[val.itemId] = ref)}
-              onClick={() => handleOpen(val.item.images.information)}
-            />
-          </div>
-        </Flip>
-      ))}
-    </Grid>
+    <div>
+      <div style={{display: "flex", justifyContent: "center", margin: "20px"}}>
+        <Paper style={style.paper}>
+          <h2>Upcoming Store Items!</h2>
+          <p>Click through the boxes to browse through unreleased items. Release dates TBD.</p>
+        </Paper>
+      </div>
+      <Grid container direction="row" justify="center" alignItems="center">
+        <ModalScreen />
+        {results.data.data.map(val => (
+          <Flip right key={val.itemId}>
+            <div style={style.container}>
+              <img
+                src={val.item.images.icon}
+                alt="icons"
+                style={style.images}
+                onMouseDown={() => mouseDown(val.itemId)}
+                onMouseUp={() => mouseUp(val.itemId)}
+                ref={ref => (results[val.itemId] = ref)}
+                onClick={() => handleOpen(imageModal(val.item.images.information))}
+              />
+            </div>
+          </Flip>
+        ))}
+      </Grid>
+    </div>
   );
 }

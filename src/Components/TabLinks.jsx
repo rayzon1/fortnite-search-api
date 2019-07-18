@@ -45,7 +45,7 @@ function TabLinks(props) {
       >
         <Tab label="Home" className={"tabs"} onClick={() => handleLinks("/")} />
         <Tab label="Upcoming Items" className={"tabs"} onClick={() => handleLinks("/upcoming")} />
-        <Tab label="Popular Items" className={"tabs"} onClick={() => handleLinks("/popular")}/>
+        <Tab label="Weapon Search" className={"tabs"} onClick={() => handleLinks("/weaponsearch")}/>
         <Tab label="Player Information" className={"tabs"} />
       </Tabs>
     </div>
