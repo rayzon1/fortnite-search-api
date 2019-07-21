@@ -16,7 +16,6 @@ export default function ModalScreen() {
             onClose={handleClose}
         >
             {modalImage}
-                
         </Modal>
     )
 }

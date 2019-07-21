@@ -63,7 +63,7 @@ export default function UpcomingResults() {
     )
   }
 
-  return (
+  return (    
     <div>
       <div style={{display: "flex", justifyContent: "center", margin: "20px"}}>
         <Paper style={style.paper}>
@@ -77,7 +77,7 @@ export default function UpcomingResults() {
           <Flip right key={val.itemId}>
             <div style={style.container}>
               <img
-                src={val.item.images.icon}
+                src={val.item.images.background}
                 alt="icons"
                 style={style.images}
                 onMouseDown={() => mouseDown(val.itemId)}

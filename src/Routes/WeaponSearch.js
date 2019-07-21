@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../Components/SearchBar';
 import Paper from '@material-ui/core/Paper';
 import WeaponSearchResults from '../Components/WeaponSearchResults';
@@ -10,7 +10,11 @@ const style = {
     }
 }
 
+
+
 export default function WeaponSearch () {
+    const [searchResults, setSearchResults] = useState("")
+
     return (
         <div>
             <div style={{display: "flex", justifyContent: "center", marginTop: "41.5px"}}>
@@ -19,8 +23,8 @@ export default function WeaponSearch () {
                     <p>Search for weapon keywords (assault rifle, shotgun, smg).</p>
                 </Paper>
             </div>
-            <SearchBar />
-            <WeaponSearchResults />
+            <SearchBar setSearchResults={setSearchResults} />
+            <WeaponSearchResults searchResults={searchResults} />
         </div>
     )
 }

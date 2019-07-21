@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles, TextField } from "@material-ui/core";
+import React, { useState } from "react";
+import { makeStyles, TextField, Button } from "@material-ui/core";
 
 // Styles from Material-UI
 const useStyles = makeStyles(theme => ({
@@ -19,24 +19,41 @@ const useStyles = makeStyles(theme => ({
   },
   menu: {
     width: 200
+  },
+  button: {
+    margin: theme.spacing(1),
+    height: "3rem",
+    top: "8px"
   }
 }));
+
+
 
 /**
  * Main Searchbar for homepage.
  */
-export default function SearchBar() {
+export default function SearchBar({ setSearchResults }) {
+  const [textInput, setTextInput] = useState("");
   const classes = useStyles();
 
+  const submitForm = (e) => {
+    e.preventDefault();
+    setSearchResults(textInput);
+  }
+
   return (
-    <form className={classes.container} noValidate autoComplete="off">
+    <form className={classes.container} onSubmit={submitForm} noValidate autoComplete="off">
       <TextField
         id="standard-search"
         label="Search field"
         type="search"
         className={classes.textField}
         margin="normal"
+        onChange={(e) => setTextInput(e.target.value)}
       />
+      <Button variant="contained" type="submit" className={classes.button}>
+        Default
+      </Button>
     </form>
   );
 }
