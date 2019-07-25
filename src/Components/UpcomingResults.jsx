@@ -14,10 +14,6 @@ const style = {
     width: "12rem",
     height: "12rem",
   },
-  paper: {
-    width: "55%",
-    height: "50%",
-  },
   modalImages:{
     width: "20rem",
     height: "20rem",
@@ -65,12 +61,6 @@ export default function UpcomingResults() {
 
   return (    
     <div>
-      <div style={{display: "flex", justifyContent: "center", margin: "20px"}}>
-        <Paper style={style.paper}>
-          <h2>Upcoming Store Items!</h2>
-          <p>Click through the boxes to browse through unreleased items. Release dates TBD.</p>
-        </Paper>
-      </div>
       <Grid container direction="row" justify="center" alignItems="center">
         <ModalScreen />
         {results.data.data.map(val => (

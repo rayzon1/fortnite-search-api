@@ -17,5 +17,6 @@ export default function ModalScreen() {
         >
             {modalImage}
         </Modal>
+
     )
 }

@@ -44,7 +44,7 @@ export default function Home() {
             className={classes.mainInfo}
             style={$(window).width() < 380 ? { width: "100vw" } : null}
           >
-            <h4 style={{ marginTop: "20px" }}>
+            <h4 style={{ marginTop: "20px" }} >
               Welcome to my FortNite item search App!
             </h4>
             <br />

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { makeStyles, TextField, Button } from "@material-ui/core";
+import {
+  makeStyles,
+  TextField,
+  Button,
+  Tooltip,
+  Fade
+} from "@material-ui/core";
 
 // Styles from Material-UI
 const useStyles = makeStyles(theme => ({
@@ -27,32 +33,48 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-
 /**
  * Main Searchbar for homepage.
+ * TODO: Add clear button to clear search field and reset results.
  */
-export default function SearchBar({ setSearchResults }) {
+export default function SearchBar({ setSearchResults, hideImage }) {
   const [textInput, setTextInput] = useState("");
   const classes = useStyles();
 
-  const submitForm = (e) => {
+  const submitForm = e => {
     e.preventDefault();
     setSearchResults(textInput);
-  }
+  };
 
   return (
-    <form className={classes.container} onSubmit={submitForm} noValidate autoComplete="off">
-      <TextField
-        id="standard-search"
-        label="Search field"
-        type="search"
-        className={classes.textField}
-        margin="normal"
-        onChange={(e) => setTextInput(e.target.value)}
-      />
-      <Button variant="contained" type="submit" className={classes.button}>
-        Default
+    <form
+      className={classes.container}
+      onSubmit={submitForm}
+      noValidate
+      autoComplete="off"
+    >
+      <Tooltip
+        TransitionComponent={Fade}
+        TransitionProps={{ timeout: 600 }}
+        placement="left"
+        title="Type and Submit to search for a weapon."
+      >
+        <TextField
+          id="standard-search"
+          label="Search field"
+          type="search"
+          className={classes.textField}
+          margin="normal"
+          onChange={e => setTextInput(e.target.value)}
+        />
+      </Tooltip>
+      <Button
+        variant="contained"
+        type="submit"
+        className={classes.button}
+        onClick={() => hideImage(textInput)}
+      >
+        Submit
       </Button>
     </form>
   );

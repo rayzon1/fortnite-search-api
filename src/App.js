@@ -25,11 +25,18 @@ function App() {
   const [modalImage, setModalImage] = useState("");
   const upcoming = `https://fortnite-api.theapinetwork.com/upcoming/get?authorization=${authToken}`;
   const news = `https://fortnite-api.theapinetwork.com/br_motd/get?authorization=${authToken}`;
-  
+  var settings = {
+    "url": "https://fortnite-api.theapinetwork.com/weapons/get",
+    "method": "GET",
+    "timeout": 0,
+    "headers": {
+      "Authorization": authToken
+    },
+  };
   
   useEffect(() => {
     callApi(upcoming, news, settings);
-  }, [upcoming, news, settings])
+  }, [upcoming, news])
 
   const callApi = (url1, url2, url3) => {
      axios.all([
@@ -43,15 +50,6 @@ function App() {
        setWeaponResults(weaponRes);
      }))
   }
-
-  var settings = {
-    "url": "https://fortnite-api.theapinetwork.com/weapons/get",
-    "method": "GET",
-    "timeout": 0,
-    "headers": {
-      "Authorization": authToken
-    },
-  };
 
   const handleOpen = (image) => {
     setOpen(true);
