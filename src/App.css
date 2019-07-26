@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: rgba(229, 243, 249, 0.5);
+  
 }
 
 .App-logo {
@@ -20,7 +22,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: rgb(198, 236, 255);
 }
 
 @font-face {

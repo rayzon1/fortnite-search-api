@@ -81,9 +81,9 @@ const weaponModal = obj => {
           textAlign: "center",
           width: "100%",
           height: "100%",
-          backgroundImage: `url(${obj.image})`,
-          backgroundSize: "8rem 8rem",
-          backgroundRepeat: "no-repeat"
+          background: "linear-gradient(-45deg, rgba(249,198,103,0.2) 11%,rgba(249,198,103,0.2) 74%,rgba(249,198,103,0.2) 93%)",
+          backgroundSize: "auto",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <h4>
@@ -106,16 +106,19 @@ const weaponModal = obj => {
         >
           {obj.rarity.toUpperCase()}
         </h4>
+        <strong>
+          <p>
+            {"DPS: "}
+            <span style={{ color: "red", margin: "0" }}>{obj.dps}</span>
+          </p>
+        </strong>
 
-        <p>
-          {"DPS: "}
-          <span style={{ color: "red", margin: "0" }}>{obj.dps}</span>
-        </p>
-
-        <p>
-          {"Firerate: "}
-          <span style={{ color: "red", margin: "0" }}>{obj.firerate}</span>
-        </p>
+        <strong>
+          <p>
+            {"Firerate: "}
+            <span style={{ color: "red", margin: "0" }}>{obj.firerate}</span>
+          </p>
+        </strong>
 
         <strong>
           <p>
