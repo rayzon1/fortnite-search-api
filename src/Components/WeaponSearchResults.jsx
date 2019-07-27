@@ -13,7 +13,7 @@ const style = {
     height: "20rem",
     position: "absolute",
     bottom: "30vh",
-    right: "42vw",
+    right: "41.5vw",
     display: "flex",
     justifyContent: "center",
     alignContent: "center"
@@ -31,128 +31,90 @@ const style = {
  */
 const colorType = val => {
   if (val === "legendary") {
-    return {
-      backgroundColor: "rgba(252, 199, 45, 0.8)",
-      borderRadius: "25px",
-      margin: "10px",
-      boxShadow: "5px 10px 8px #888888"
-    };
+    return modalBackground("rgba(252, 199, 45, 0.8)");
   } else if (val === "epic") {
-    return {
-      backgroundColor: "rgba(134, 3, 174, 0.7)",
-      borderRadius: "25px",
-      margin: "10px",
-      boxShadow: "5px 10px 8px #888888"
-    };
+    return modalBackground("rgba(134, 3, 174, 0.7)");
   } else if (val === "rare") {
-    return {
-      backgroundColor: "rgba(3, 116, 204, 0.8)",
-      borderRadius: "25px",
-      margin: "10px",
-      boxShadow: "5px 10px 8px #888888"
-    };
+    return modalBackground("rgba(3, 116, 204, 0.8)");
   } else if (val === "uncommon") {
-    return {
-      backgroundColor: "rgba(55, 166, 30, 0.8)",
-      borderRadius: "25px",
-      margin: "10px",
-      boxShadow: "5px 10px 8px #888888"
-    };
+    return modalBackground("rgba(55, 166, 30, 0.8)");
   } else {
-    return {
-      backgroundColor: "rgba(109, 103, 105, 0.5)",
-      borderRadius: "25px",
-      margin: "10px",
-      boxShadow: "5px 10px 8px #888888"
-    };
+    return modalBackground("rgba(109, 103, 105, 0.5)");
   }
 };
 
-/**
- * Weapon modal component will be displayed when any of the weapon boxes are clicked.
- * Takes in weapon information as parameters to display in modal.
- * @param {object} obj
- */
+const modalBackground = (color) => {
+  return {
+    backgroundColor: `${color}`,
+    borderRadius: "25px",
+    margin: "10px",
+    boxShadow: "5px 10px 8px #888888"
+  };
+};
+
+const createWeaponStats = (stat, object) => {
+  return (
+    <strong>
+      <p>
+        {`${stat}: `}
+        <span style={{ color: "red", margin: "0" }}>{object}</span>
+      </p>
+    </strong>
+  );
+};
+
+const rarityNameStyle = (rarity) => {
+    if (rarity === "epic") {
+        return {color: "purple"}
+    } else if (rarity === "common") {
+        return { color: "gray" }
+    } else if (rarity === "legendary") {
+        return { color: "gold" }
+    } else if (rarity === "rare") {
+        return { color: "blue" }
+    } else {
+        return { color: "green" }
+    }
+}
+
 const weaponModal = obj => {
   return (
-    <Paper style={style.modalPaper}>
-      <div
-        style={{
-          textAlign: "center",
-          width: "100%",
-          height: "100%",
-          background: "linear-gradient(-45deg, rgba(249,198,103,0.2) 11%,rgba(249,198,103,0.2) 74%,rgba(249,198,103,0.2) 93%)",
-          backgroundSize: "auto",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <h4>
-          <strong>{obj.name}</strong>
-        </h4>
-        <h4
-          style={
-            obj.rarity === "epic"
-              ? { color: "purple" }
-              : obj.rarity === "common"
-              ? { color: "gray" }
-              : obj.rarity === "legendary"
-              ? { color: "gold" }
-              : obj.rarity === "rare"
-              ? { color: "blue" }
-              : obj.rarity === "uncommon"
-              ? { color: "green" }
-              : null
-          }
+    <>
+      <Paper style={style.modalPaper}>
+        <div
+          style={{
+            textAlign: "center",
+            width: "100%",
+            height: "100%",
+            background:
+              "linear-gradient(-45deg, rgba(254,252,234,0.5) 0%,rgba(241,218,54,0.5) 100%)",
+            backgroundSize: "auto",
+            backgroundRepeat: "no-repeat"
+          }}
         >
-          {obj.rarity.toUpperCase()}
-        </h4>
-        <strong>
-          <p>
-            {"DPS: "}
-            <span style={{ color: "red", margin: "0" }}>{obj.dps}</span>
-          </p>
-        </strong>
-
-        <strong>
-          <p>
-            {"Firerate: "}
-            <span style={{ color: "red", margin: "0" }}>{obj.firerate}</span>
-          </p>
-        </strong>
-
-        <strong>
-          <p>
-            {"Body Hit: "}
-            <span style={{ color: "red" }}>{obj.bodyhit}</span>
-          </p>
-        </strong>
-        <strong>
-          <p>
-            {"Head Hit: "}
-            <span style={{ color: "red" }}>{obj.headhit}</span>
-          </p>
-        </strong>
-        <strong>
-          <p>
-            {"Magazine Size: "}
-            <span style={{ color: "red" }}>{obj.magazinesize}</span>
-          </p>
-        </strong>
-        <strong>
-          <p>
-            {"Reload Time: "}
-            <span style={{ color: "red" }}>{obj.reloadtime}</span>
-          </p>
-        </strong>
-      </div>
-    </Paper>
+          <h4>
+            <strong>{obj.name}</strong>
+          </h4>
+          <h4
+            style={rarityNameStyle(obj.rarity)}
+          >
+            {obj.rarity.toUpperCase()}
+          </h4>
+          {createWeaponStats("DPS", obj.dps)}
+          {createWeaponStats("Firerate", obj.firerate)}
+          {createWeaponStats("Body Hit", obj.bodyhit)}
+          {createWeaponStats("Head Hit", obj.headhit)}
+          {createWeaponStats("Magazine Size", obj.magazinesize)}
+          {createWeaponStats("Reload Time", obj.reloadtime)}
+        </div>
+      </Paper>
+    </>
   );
 };
 
 export default function WeaponSearchresults({ searchResults }) {
   const state = useContext(UserContext);
   const { weaponResults, handleOpen } = state;
-  console.log(weaponResults);
   return (
     <div style={style.container}>
       <ModalScreen />

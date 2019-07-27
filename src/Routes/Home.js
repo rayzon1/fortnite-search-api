@@ -33,13 +33,6 @@ export default function Home() {
   return (
     <div style={{ marginTop: "40px" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          {$(window).width() < 380 ? null : (
-            <img
-              src={require("../Static/fortnite-png-47422.png")}
-              alt="homePic"
-              className={classes.media}
-            />
-          )}
           <Paper
             className={classes.mainInfo}
             style={$(window).width() < 380 ? { width: "100vw" } : null}
@@ -68,13 +61,6 @@ export default function Home() {
               devices.
             </p>
           </Paper>
-          {$(window).width() < 380 ? null : (
-            <img
-              src={require("../Static/fortnite-png-47403.png")}
-              alt="homePic"
-              className={classes.media}
-            />
-          )}
         </div>
       <br />
       <br />
@@ -98,7 +84,7 @@ export default function Home() {
           {newsResults.data.data.map((val, index) => (
               <Fade right key={index}>
                 <div style={{ textAlign: "left", margin: "20px", display: "flex"}}>
-                  <img src={val.image} className={classes.newsImages} alt="news" />
+                  <img src={val.image} className={classes.newsImages} alt="news" style={{ width: "50%", height: "50%" }}/>
                   <p>{val.body}</p>
                 </div>
               </Fade>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Jumbotron, Container } from "react-bootstrap";
 
+
 export default function HomeJumbotron() {
   return (
     <Jumbotron fluid style={{margin: 0, backgroundColor: "rgba(198, 236, 255, 0.5)"}}>
