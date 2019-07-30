@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.paper {
+    width: 55%;
+    height: 50%;
+}

@@ -1,17 +1,8 @@
 import React, { useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { withRouter } from "react-router-dom";
 import UserContext from "../Components/Context/index";
-
-// Styles from Material-UI
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-    margin: 0
-  }
-});
 
 /**
  * Centered tabs, will display on all routes.
@@ -21,7 +12,7 @@ const useStyles = makeStyles({
  *   ! important
  */
 function TabLinks(props) {
-  const classes = useStyles();
+  
   const state = useContext(UserContext);
   const { value, setValue } = state;
 
@@ -34,8 +25,7 @@ function TabLinks(props) {
   };
 
   return (
-    <div className={classes.root}>
-      
+    <div style={{ flexGrow: "1", margin: "0"}}>
       <Tabs
         value={value}
         onChange={handleChange}

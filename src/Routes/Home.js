@@ -1,24 +1,8 @@
 import React, { useContext } from "react";
-import { Paper, makeStyles } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import { Fade } from "react-reveal";
-import $ from "jquery";
 import UserContext from "../Components/Context/index";
-
-const useStyles = makeStyles(theme => ({
-  media: {
-    height: "20%",
-    width: "20%"
-  },
-  mainInfo: {
-    width: "55%",
-    height: "50%"
-  },
-  newsImages: {
-    width: "20rem",
-    height: "10rem",
-    marginRight: "20px"
-  }
-}));
+import styles from "../Modules/route_styles/home-route.module.css";
 
 /**
  * Main Home component will render homepage upon route.
@@ -26,24 +10,22 @@ const useStyles = makeStyles(theme => ({
  * TODO: Create information sections about Fortnite, and app functionality.
  */
 export default function Home() {
-  const classes = useStyles();
   const state = useContext(UserContext);
   const { newsResults } = state;
 
   return (
-    <div style={{ marginTop: "40px" }}>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+    <div className={styles.wrapper}> 
+        <div className={styles.container}>
           <Paper
-            className={classes.mainInfo}
-            style={$(window).width() < 380 ? { width: "100vw" } : null}
+            className={styles.mainInfo}
           >
-            <h4 style={{ marginTop: "20px" }} >
+            <h4 className={styles.title} > 
               Welcome to my FortNite item search App!
             </h4>
             <br />
             <h5>What is FortNite?</h5>
             <br />
-            <p style={{ margin: "20px" }}>
+            <p className={styles.content}>
               Fortnite is an online video game developed by Epic Games and
               released in 2017. It is available in three distinct game mode
               versions that otherwise share the same general gameplay and game
@@ -64,12 +46,11 @@ export default function Home() {
         </div>
       <br />
       <br />
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className={styles.container}> 
         <Paper
-          className={classes.mainInfo}
-          style={$(window).width() < 380 ? { width: "100vw" } : null}
+          className={styles.mainInfo}
         >
-          <div style={{ textAlign: "center", margin: "20px" }}>
+          <div className={styles.newsContainer}>
             <h2>Fortnite News</h2>
             <p>
               This is the news.This is the news.This is the news.This is the
@@ -83,8 +64,8 @@ export default function Home() {
 
           {newsResults.data.data.map((val, index) => (
               <Fade right key={index}>
-                <div style={{ textAlign: "left", margin: "20px", display: "flex"}}>
-                  <img src={val.image} className={classes.newsImages} alt="news" style={{ width: "50%", height: "50%" }}/>
+                <div className={styles.imageContainer}> 
+                  <img src={val.image} className={styles.newsImages} alt="news"/>
                   <p>{val.body}</p>
                 </div>
               </Fade>

@@ -3,6 +3,7 @@ import SearchBar from "../Components/SearchBar";
 import Paper from "@material-ui/core/Paper";
 import WeaponSearchResults from "../Components/WeaponSearchResults";
 import UserContext from "../Components/Context/index";
+import fortnite_art_weapons from "../Static/fortnite_art_weapons.jpg";
 
 const style = {
   container: {
@@ -51,10 +52,10 @@ export default function WeaponSearch() {
       </div>
       <SearchBar setSearchResults={setSearchResults} hideImage={hideImage} />
       <img
-        src={require("../Static/fortnite_art_weapons.jpg")}
+        src={fortnite_art_weapons}
         style={style.images}
         ref={imageRef}
-        alt=""
+        alt="fortnite-art"
       />
       <WeaponSearchResults searchResults={searchResults} />
     </div>

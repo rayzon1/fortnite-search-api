@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
+import octocat from "../Static/Icons/Octocat.png";
 
 export default function Header() {
   return (
@@ -13,7 +14,7 @@ export default function Header() {
         <Nav>
           <Nav.Link href="https://github.com/rayzon1/fortnite-search-api" target="_blank">
             <img
-              src={require("../Static/Icons/Octocat.png")}
+              src={octocat}
               style={{ width: "4rem", height: "3rem" }}
               alt="github-icon"
             />
