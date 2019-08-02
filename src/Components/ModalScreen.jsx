@@ -14,7 +14,7 @@ export default function ModalScreen() {
             aria-describedby="simple-modal-description"
             open={open}
             onClose={handleClose}
-            style={{ borderRadius: "20px" }}
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
         >
             {modalImage}
         </Modal>

@@ -11,12 +11,6 @@ const style = {
   modalPaper: {
     width: "20rem",
     height: "20rem",
-    position: "absolute",
-    bottom: "30vh",
-    right: "41.5vw",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center"
   },
   container: {
     marginTop: "40px",

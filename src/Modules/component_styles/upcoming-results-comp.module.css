@@ -21,10 +21,4 @@
 .modalPaper {
     width: 20rem;
     height: 20rem;
-    position: absolute;
-    bottom: 30vh;
-    right: 42vw;
-    display: flex;
-    justify-content: center;
-    align-content: center;
 }
