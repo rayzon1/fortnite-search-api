@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto+Slab&display=swap');
+
 .App {
   text-align: center;
   background-color: rgba(229, 243, 249, 0.5);
   height: auto;
+  font-family: 'Roboto', sans-serif;
 }
 
 .App-logo {
@@ -33,6 +36,8 @@
 .font {
   font-family: "fortniteFont";
 }
+
+
 
 
 

@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.paper {
+    width: 55%;
+    height: 50%;
+}
+
+.images {
+    width: 50%;
+    height: 50%;
+    margin-top: 40px;
+    margin-bottom: 100px;
+    border-radius: 25px;
+    box-shadow: 5px 10px 8px #888888;
+}

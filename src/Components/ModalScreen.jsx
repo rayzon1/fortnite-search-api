@@ -16,7 +16,9 @@ export default function ModalScreen() {
             onClose={handleClose}
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
         >
-            {modalImage}
+            <>
+                {modalImage}
+            </>
         </Modal>
 
     )

@@ -2,42 +2,32 @@ import React, { useContext } from "react";
 import UserContext from "./Context/index";
 import ModalScreen from "./ModalScreen";
 import { Paper } from "@material-ui/core";
-
-const style = {
-  weaponPics: {
-    width: "12rem",
-    height: "10rem"
-  },
-  modalPaper: {
-    width: "20rem",
-    height: "20rem",
-  },
-  container: {
-    marginTop: "40px",
-    display: "inline-block",
-    width: "85%",
-    wordWrap: "wrap"
-  }
-};
+import styles  from "../Modules/component_styles/weaponsearch-results-comp.module.css";
 
 /**
  * ColorType will determine the background color styles of the item depending on obj.rarity.
  */
 const colorType = val => {
-  if (val === "legendary") {
-    return modalBackground("rgba(252, 199, 45, 0.8)");
-  } else if (val === "epic") {
-    return modalBackground("rgba(134, 3, 174, 0.7)");
-  } else if (val === "rare") {
-    return modalBackground("rgba(3, 116, 204, 0.8)");
-  } else if (val === "uncommon") {
-    return modalBackground("rgba(55, 166, 30, 0.8)");
-  } else {
-    return modalBackground("rgba(109, 103, 105, 0.5)");
+  switch (val) {
+    case "legendary":
+      return weaponBackground("rgba(252, 199, 45, 0.8)");
+    case "epic":
+      return weaponBackground("rgba(134, 3, 174, 0.7)");
+    case "rare":
+      return weaponBackground("rgba(3, 116, 204, 0.8)");
+    case "uncommon":
+      return weaponBackground("rgba(55, 166, 30, 0.8)");
+    default:
+      return weaponBackground("rgba(109, 103, 105, 0.5)");
   }
 };
 
-const modalBackground = (color) => {
+/**
+ * Function will determine the background color of the image container.
+ * Color string will be added as an argument.
+ * @param {string} color 
+ */
+const weaponBackground = (color) => {
   return {
     backgroundColor: `${color}`,
     borderRadius: "25px",
@@ -58,33 +48,40 @@ const createWeaponStats = (stat, object) => {
 };
 
 const rarityNameStyle = (rarity) => {
-    if (rarity === "epic") {
-        return {color: "purple"}
-    } else if (rarity === "common") {
-        return { color: "gray" }
-    } else if (rarity === "legendary") {
-        return { color: "gold" }
-    } else if (rarity === "rare") {
-        return { color: "blue" }
-    } else {
-        return { color: "green" }
+    switch (rarity) {
+      case "epic":
+        return {color: "purple"};
+      case "uncommon":
+        return { color: "green" };
+      case "legendary":
+        return { color: "gold" };
+      case "rare":
+        return { color: "blue" };
+      default:
+        return { color: "gray" };
     }
+}
+
+// !important
+//TODO: add switch value to determine the color gradient of the modals background.
+const modalBackgroundColor =(rarity) => {
+  switch (rarity) {
+    case "rare":
+      return {background: "linear-gradient(-45deg, rgba(0, 144, 255, 0.3) 0%,rgba(87, 179, 249, 0.3) 100%)"}; 
+    case "legendary":
+      return {background: "linear-gradient(-45deg, rgba(254,252,234,0.5) 0%,rgba(241,218,54,0.5) 100%)"}
+    default:
+      break;
+  }
 }
 
 const weaponModal = obj => {
   return (
     <>
-      <Paper style={style.modalPaper}>
+      <Paper className={styles.modalPaper}>
         <div
-          style={{
-            textAlign: "center",
-            width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(-45deg, rgba(254,252,234,0.5) 0%,rgba(241,218,54,0.5) 100%)",
-            backgroundSize: "auto",
-            backgroundRepeat: "no-repeat"
-          }}
+          className={styles.modalPicBackground}
+          style={modalBackgroundColor(obj.rarity)}
         >
           <h4>
             <strong>{obj.name}</strong>
@@ -110,7 +107,7 @@ export default function WeaponSearchresults({ searchResults }) {
   const state = useContext(UserContext);
   const { weaponResults, handleOpen } = state;
   return (
-    <div style={style.container}>
+    <div className={styles.container}>
       <ModalScreen />
       {weaponResults.data.data.entries.map(val => (
         <React.Fragment key={val.identifier}>
@@ -139,7 +136,7 @@ export default function WeaponSearchresults({ searchResults }) {
                   <p>
                     <strong>{val.name}</strong>
                   </p>
-                  <img src={val.image} style={style.weaponPics} alt="" />
+                  <img src={val.image} className={styles.weaponPics} alt="" />
                 </div>
               </label>
             )}

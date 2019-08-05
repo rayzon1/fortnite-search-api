@@ -62,6 +62,7 @@ function App() {
   };
 
   // ! Next time create store object with state and action values to keep it more organized.
+  // ! USE REACT-ENTITIES https://www.npmjs.com/package/react-entities
   return (
     <HashRouter>
       <Switch>

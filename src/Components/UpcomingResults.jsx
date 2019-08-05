@@ -36,7 +36,7 @@ export default function UpcomingResults() {
 
   return (    
     <div className={styles.container}>
-      <Grid container direction="row" justify="center" alignItems="center" style={{ width: "75%"}}>
+      <Grid container direction="row" justify="center" alignItems="center" style={{ width: "91%"}}>
         <ModalScreen />
         {results.data.data.map(val => (
           <Flip right key={val.itemId}>

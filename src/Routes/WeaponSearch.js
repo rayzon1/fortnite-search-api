@@ -4,24 +4,26 @@ import Paper from "@material-ui/core/Paper";
 import WeaponSearchResults from "../Components/WeaponSearchResults";
 import UserContext from "../Components/Context/index";
 import fortnite_art_weapons from "../Static/fortnite_art_weapons.jpg";
+import styles from "../Modules/route_styles/weapon-search-route.module.css";
 
 const style = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "40px"
-  },
-  paper: {
-    width: "55%",
-    height: "50%"
-  },
-  images: {
-    width: "50%",
-    height: "50%",
-    marginTop: "40px",
-    borderRadius: "25px",
-    boxShadow: "5px 10px 8px #888888"
-  }
+  // container: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   marginTop: "40px"
+  // },
+  // paper: {
+  //   width: "55%",
+  //   height: "50%"
+  // },
+  // images: {
+  //   width: "50%",
+  //   height: "50%",
+  //   marginTop: "40px",
+  //   marginBottom: "100px",
+  //   borderRadius: "25px",
+  //   boxShadow: "5px 10px 8px #888888"
+  // }
 };
 
 export default function WeaponSearch() {
@@ -30,6 +32,7 @@ export default function WeaponSearch() {
   const { setValue } = state;
   const imageRef = React.createRef();
 
+  //! escalate to app.js. Turn into a Boolean hook, with true or false for submit press.
   const hideImage = input => {
     if (input.length > 0) {
       imageRef.current.style.display = "none";
@@ -44,8 +47,8 @@ export default function WeaponSearch() {
 
   return (
     <div>
-      <div style={style.container}>
-        <Paper style={style.paper}>
+      <div className={styles.container}>
+        <Paper className={styles.paper}>
           <h2>Weapon Search Page!</h2>
           <p>Search for weapon keywords (assault rifle, shotgun, smg).</p>
         </Paper>
@@ -53,7 +56,7 @@ export default function WeaponSearch() {
       <SearchBar setSearchResults={setSearchResults} hideImage={hideImage} />
       <img
         src={fortnite_art_weapons}
-        style={style.images}
+        className={styles.images}
         ref={imageRef}
         alt="fortnite-art"
       />

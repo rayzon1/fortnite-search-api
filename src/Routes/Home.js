@@ -18,9 +18,10 @@ export default function Home() {
         <div className={styles.container}>
           <Paper
             className={styles.mainInfo}
+            // style={{backgroundColor: "rgba(89, 42, 99, 0.1)"}}
           >
             <h4 className={styles.title} > 
-              Welcome to my FortNite item search App!
+              <span>Welcome to my FortNite item search App!</span>
             </h4>
             <br />
             <h5>What is FortNite?</h5>
