@@ -10,8 +10,8 @@ export default function Upcoming() {
     <div>
       <div className={styles.container}>
         <Paper className={styles.paper}>
-          <h2>Upcoming Store Items!</h2>
-          <p>
+          <h2 className={styles.info}>Upcoming Store Items!</h2>
+          <p className={styles.info}>
             Click through the boxes to browse through unreleased items. Release
             dates TBD.
           </p>

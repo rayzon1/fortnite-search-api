@@ -37,7 +37,7 @@
     margin-right: 20px; 
 }
 
-@media (max-width: 380px) {
+@media (max-width: 769px) {
     .mainInfo {
         width: auto;
         height: auto;

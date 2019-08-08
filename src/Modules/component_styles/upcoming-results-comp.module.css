@@ -22,3 +22,13 @@
     width: 20rem;
     height: 20rem;
 }
+
+@media (max-width: 769px) {
+
+    .images {
+        width: 20rem;
+        height: 20rem;
+    }
+
+
+}

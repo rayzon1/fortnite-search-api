@@ -36,17 +36,27 @@ const weaponBackground = (color) => {
   };
 };
 
-const createWeaponStats = (stat, object) => {
+/**
+ * This component creates the frame for the weapon stats on the modal.
+ * @param {string} stat 
+ * @param {string} value 
+ */
+const createWeaponStats = (stat, value) => {
   return (
     <strong>
       <p>
         {`${stat}: `}
-        <span style={{ color: "red", margin: "0" }}>{object}</span>
+        <span style={{ color: "red", margin: "0" }}>{value}</span>
       </p>
     </strong>
   );
 };
 
+/**
+ * This will change the color of the modal title depending on the 
+ * rarity of the weapon.
+ * @param {string} rarity 
+ */
 const rarityNameStyle = (rarity) => {
     switch (rarity) {
       case "epic":
@@ -75,6 +85,11 @@ const modalBackgroundColor =(rarity) => {
   }
 }
 
+/**
+ * This is the actual modal component that will show upon clicking 
+ * the weapon box.
+ * @param {object} obj 
+ */
 const weaponModal = obj => {
   return (
     <>
@@ -106,6 +121,15 @@ const weaponModal = obj => {
 export default function WeaponSearchresults({ searchResults }) {
   const state = useContext(UserContext);
   const { weaponResults, handleOpen } = state;
+
+  const mouseDown = key => {
+    weaponResults[key].parentNode.style.boxShadow = "none";
+  };
+
+  const mouseUp = key => {
+    weaponResults[key].parentNode.style.boxShadow = "5px 10px 8px #888888";
+  };
+
   return (
     <div className={styles.container}>
       <ModalScreen />
@@ -132,6 +156,8 @@ export default function WeaponSearchresults({ searchResults }) {
                       })
                     )
                   }
+                  onMouseDown={() => mouseDown(val.identifier)}
+                  onMouseUp={() => mouseUp(val.identifier)}
                 >
                   <p>
                     <strong>{val.name}</strong>

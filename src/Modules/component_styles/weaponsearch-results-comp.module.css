@@ -19,8 +19,15 @@
     text-align: center;
     width: 100%;
     height: 100%;
-    /* background: linear-gradient(-45deg, rgba(254,252,234,0.5) 0%,rgba(241,218,54,0.5) 100%); */
-    /* background: linear-gradient(-45deg, rgba(0, 144, 255, 0.5) 0%,rgba(87, 179, 249, 0.5) 100%); */
     background-size: auto;
     background-repeat: no-repeat;
+}
+
+@media (max-width: 769px) {
+
+    .weaponPics {
+        width: 18rem;
+        height: 16rem;
+    }
+
 }

@@ -3,6 +3,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { withRouter } from "react-router-dom";
 import UserContext from "../Components/Context/index";
+import $ from "jquery";
 
 /**
  * Centered tabs, will display on all routes.
@@ -31,12 +32,13 @@ function TabLinks(props) {
         onChange={handleChange}
         indicatorColor="primary"
         textColor="primary"
+        variant={$(window).width() < 769 ? "fullWidth" : "standard"}
         centered
       >
         <Tab label="Home" className={"tabs"} onClick={() => handleLinks("/")} />
-        <Tab label="Upcoming Items" className={"tabs"} onClick={() => handleLinks("/upcoming")} />
-        <Tab label="Weapon Search" className={"tabs"} onClick={() => handleLinks("/weaponsearch")}/>
-        <Tab label="Player Information" className={"tabs"} />
+        <Tab label={$(window).width() < 769 ? "Upcoming" : "Upcoming Items"} className={"tabs"} onClick={() => handleLinks("/upcoming")} />
+        <Tab label={$(window).width() < 769 ? "Weapons" : "Weapon Search"} className={"tabs"} onClick={() => handleLinks("/weaponsearch")}/>
+        <Tab label={$(window).width() < 769 ? "Players" : "Player Information"} className={"tabs"} />
       </Tabs>
     </div>
   );
