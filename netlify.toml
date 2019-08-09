@@ -1,0 +1,4 @@
+[build]
+base = "search-fortnite-api/"
+publish = "search-fortnite-api/build/"
+command = "npm build"
