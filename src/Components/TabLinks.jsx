@@ -38,7 +38,7 @@ function TabLinks(props) {
         <Tab label="Home" className={"tabs"} onClick={() => handleLinks("/")} />
         <Tab label={$(window).width() < 769 ? "Upcoming" : "Upcoming Items"} className={"tabs"} onClick={() => handleLinks("/upcoming")} />
         <Tab label={$(window).width() < 769 ? "Weapons" : "Weapon Search"} className={"tabs"} onClick={() => handleLinks("/weaponsearch")}/>
-        <Tab label={$(window).width() < 769 ? "Players" : "Player Information"} className={"tabs"} />
+        <Tab label={$(window).width() < 769 ? "Players" : "Player Information"} className={"tabs"} onClick={() => handleLinks("/playersearch")}/>
       </Tabs>
     </div>
   );

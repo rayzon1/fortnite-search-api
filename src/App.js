@@ -4,6 +4,7 @@ import Header from './Components/Header';
 import Home from './Routes/Home';
 import Upcoming from './Routes/Upcoming';
 import WeaponSearch from './Routes/WeaponSearch';
+import PlayerSearch from './Routes/PlayerSearch';
 import HomeJumbotron from "./Components/HomeJumbotron";
 import TabLinks from "./Components/TabLinks";
 import { HashRouter, Route, Switch } from "react-router-dom";
@@ -25,24 +26,43 @@ function App() {
   const [modalImage, setModalImage] = useState("");
   const upcoming = `https://fortnite-api.theapinetwork.com/upcoming/get?authorization=${authToken}`;
   const news = `https://fortnite-api.theapinetwork.com/br_motd/get?authorization=${authToken}`;
-  var settings = {
-    "url": "https://fortnite-api.theapinetwork.com/weapons/get",
-    "method": "GET",
-    "timeout": 0,
-    "headers": {
-      "Authorization": authToken
-    },
-  };
+  const weapons = "https://fortnite-api.theapinetwork.com/weapons/get"
+
+   /**
+   * 
+   *  TODO: Player search provider functions will go here.
+   *  TODO: Create seperate api call functions for playersearch.
+   *  TODO: Will create new playersearch context provider/consumer.
+   *  !New provider will wrap here.
+   * 
+   */
+
+  const apiSettings = (url) => {
+    var settings = {
+      "url": `${url}`,
+      "method": "GET",
+      "timeout": 0,
+      "headers": {
+        "Authorization": authToken
+      },
+    };
+    return settings;
+  }
+  
   
   useEffect(() => {
-    callApi(upcoming, news, settings);
+    callApi(upcoming, news, apiSettings(weapons));
   }, [upcoming, news])
 
+  /**
+   * Main API call function for upcoming, news and weapons page.
+   * Will call for data and populate pages upon site load.
+   */
   const callApi = (url1, url2, url3) => {
      axios.all([
        axios.get(url1),
        axios.get(url2),
-       axios(url3)
+       axios(url3),
      ])
      .then(axios.spread((upcomingRes, newsRes, weaponRes) => {
        setResults(upcomingRes);
@@ -67,17 +87,17 @@ function App() {
     <HashRouter>
       <Switch>
           <UserProvider value={{
-            results: results,
-            newsResults: newsResults,
-            upcoming: upcoming,
-            value: value,
-            setValue: setValue,
-            open: open,
-            setOpen: setOpen,
-            handleOpen: handleOpen,
-            handleClose: handleClose,
-            modalImage: modalImage,
-            weaponResults: weaponResults
+            results,
+            newsResults,
+            upcoming,
+            value,
+            setValue,
+            open,
+            setOpen,
+            handleOpen,
+            handleClose,
+            modalImage,
+            weaponResults,
           }}>
             <div className="App">
               <Header /> 
@@ -86,6 +106,7 @@ function App() {
               <Route exact path='/' render={() => newsResults.length === 0 ? null : <Home />} />
               <Route exact path='/upcoming' render={() => results.length === 0 ? null : <Upcoming />} />
               <Route exact path='/weaponsearch' render={() => weaponResults.length === 0 ? null : <WeaponSearch />} />
+              <Route exact path='/playersearch' render={() => <PlayerSearch />} />
             </div> 
           </UserProvider>
       </Switch>
