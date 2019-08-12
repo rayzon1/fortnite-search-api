@@ -11,6 +11,8 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import authToken from './config';
 import axios from 'axios';
 import { UserProvider } from './Components/Context/index';
+import { PlayerSearchProvider } from './Components/Context/PlayerSearchContext';
+import { SearchBarProvider } from './Components/Context/SearchBarContext';
 
 /**
  *  Main App to organize and structure all of my components.
@@ -21,6 +23,7 @@ function App() {
   const [results, setResults] = useState([]);
   const [newsResults, setNewsResults] = useState([]);
   const [weaponResults, setWeaponResults] = useState([]);
+  const [searchResults, setSearchResults] = useState("");
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
   const [modalImage, setModalImage] = useState("");
@@ -35,6 +38,52 @@ function App() {
    *  TODO: Will create new playersearch context provider/consumer.
    *  !New provider will wrap here.
    * 
+   */
+
+  const [userResults, setUserResults] = useState("");
+  const [userId, setUserId] = useState([]);
+
+
+  const users = username  => {
+    return `https://fortnite-api.theapinetwork.com/users/id?username=${username}`;
+  };
+
+  const getUserId = uid => {
+    return `https://fortnite-api.theapinetwork.com/prod09/users/public/br_stats_v2?user_id=${uid}`;
+  };
+
+  const callPlayerSearchApi = url => {
+
+    return axios(url)
+      .then(val => {
+        console.log(val);
+        if(Object.keys(val.data).length > 2){
+          return console.log("unknown user")
+        }     
+        if(val.data.data.uid) {
+          let data1 = val.data.data.uid
+          return setUserResults(data1);
+        }
+           
+      })
+
+  }
+
+  const callPlayerSearchApi2 = url => {
+    if (userResults.length > 0) {
+      return axios(url).then(val => {
+        return setUserId(val.data);
+      }).catch(error => console.log("There was an error", error.code))
+    }
+    
+  }
+
+
+  /**
+   * 
+   * This is the start of functions for other pages.
+   * ! Home, Upcoming and Weapon search functions state.
+   *  
    */
 
   const apiSettings = (url) => {
@@ -86,29 +135,45 @@ function App() {
   return (
     <HashRouter>
       <Switch>
-          <UserProvider value={{
-            results,
-            newsResults,
-            upcoming,
-            value,
-            setValue,
-            open,
-            setOpen,
-            handleOpen,
-            handleClose,
-            modalImage,
-            weaponResults,
+        <SearchBarProvider value={{
+          searchResults,
+          setSearchResults
+        }}>
+          <PlayerSearchProvider value= {{
+            userResults,
+            userId,
+            users,
+            getUserId,
+            callPlayerSearchApi,
+            apiSettings,
+            callPlayerSearchApi2
           }}>
-            <div className="App">
-              <Header /> 
-              <HomeJumbotron /> 
-              <TabLinks /> 
-              <Route exact path='/' render={() => newsResults.length === 0 ? null : <Home />} />
-              <Route exact path='/upcoming' render={() => results.length === 0 ? null : <Upcoming />} />
-              <Route exact path='/weaponsearch' render={() => weaponResults.length === 0 ? null : <WeaponSearch />} />
-              <Route exact path='/playersearch' render={() => <PlayerSearch />} />
-            </div> 
-          </UserProvider>
+            <UserProvider value={{
+              results,
+              newsResults,
+              upcoming,
+              value,
+              setValue,
+              open,
+              setOpen,
+              handleOpen,
+              handleClose,
+              modalImage,
+              weaponResults,
+              searchResults,
+            }}>
+              <div className="App">
+                <Header /> 
+                <HomeJumbotron /> 
+                <TabLinks /> 
+                <Route exact path='/' render={() => newsResults.length === 0 ? null : <Home />} />
+                <Route exact path='/upcoming' render={() => results.length === 0 ? null : <Upcoming />} />
+                <Route exact path='/weaponsearch' render={() => weaponResults.length === 0 ? null : <WeaponSearch />} />
+                <Route exact path='/playersearch' render={() =>  <PlayerSearch />} />
+              </div> 
+            </UserProvider>
+          </PlayerSearchProvider>
+        </SearchBarProvider>
       </Switch>
     </HashRouter>
     

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   TextField,
   Button,
@@ -6,12 +6,15 @@ import {
   Fade
 } from "@material-ui/core";
 import styles from "../Modules/component_styles/searchbar-comp.module.css";
+import SearchBarContext from "./Context/SearchBarContext";
 
 /**
  * Main Searchbar for homepage.
  * TODO: Add clear button to clear search field and reset results.
  */
-export default function SearchBar({ setSearchResults, hideImage }) {
+export default function SearchBar({ hideImage }) {
+  const state = useContext(SearchBarContext);
+  const { setSearchResults } = state;
   const [textInput, setTextInput] = useState("");
 
   const submitForm = e => {
