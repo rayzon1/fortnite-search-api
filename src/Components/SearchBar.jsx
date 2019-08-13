@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
   TextField,
   Button,
@@ -14,13 +14,7 @@ import SearchBarContext from "./Context/SearchBarContext";
  */
 export default function SearchBar({ hideImage }) {
   const state = useContext(SearchBarContext);
-  const { setSearchResults } = state;
-  const [textInput, setTextInput] = useState("");
-
-  const submitForm = e => {
-    e.preventDefault();
-    setSearchResults(textInput);
-  };
+  const { submitForm, textInput, setTextInput } = state;
 
   return (
     <form

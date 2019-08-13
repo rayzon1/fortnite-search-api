@@ -24,6 +24,8 @@ function App() {
   const [newsResults, setNewsResults] = useState([]);
   const [weaponResults, setWeaponResults] = useState([]);
   const [searchResults, setSearchResults] = useState("");
+  const [textInput, setTextInput] = useState("");
+  const [searchBarSubmit, setSearchBarSubmit] = useState(false);
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
   const [modalImage, setModalImage] = useState("");
@@ -56,7 +58,6 @@ function App() {
 
     return axios(url)
       .then(val => {
-        console.log(val);
         if(Object.keys(val.data).length > 2){
           return console.log("unknown user")
         }     
@@ -66,8 +67,12 @@ function App() {
         }
            
       })
-
   }
+
+  const submitForm = e => {
+    e.preventDefault();
+    setSearchBarSubmit(true);
+  };
 
   const callPlayerSearchApi2 = url => {
     if (userResults.length > 0) {
@@ -75,17 +80,12 @@ function App() {
         return setUserId(val.data);
       }).catch(error => console.log("There was an error", error.code))
     }
-    
   }
 
-
   /**
-   * 
    * This is the start of functions for other pages.
    * ! Home, Upcoming and Weapon search functions state.
-   *  
    */
-
   const apiSettings = (url) => {
     var settings = {
       "url": `${url}`,
@@ -98,10 +98,24 @@ function App() {
     return settings;
   }
   
-  
+  /**
+   * ! useEffect hook - Lifecycle method
+   * Primary api call to gather all data from the routes.
+   */
   useEffect(() => {
     callApi(upcoming, news, apiSettings(weapons));
   }, [upcoming, news])
+
+  /** 
+   * ! useEffect hook - Lifecycle method
+   * Searchbar use effect to change boolean value of search bar submission.
+   */
+  useEffect(() => {
+    if(searchBarSubmit === true) {
+      setSearchBarSubmit(false);
+      return setSearchResults(textInput);
+    }
+  }, [searchBarSubmit, textInput])
 
   /**
    * Main API call function for upcoming, news and weapons page.
@@ -131,13 +145,16 @@ function App() {
   };
 
   // ! Next time create store object with state and action values to keep it more organized.
-  // ! USE REACT-ENTITIES https://www.npmjs.com/package/react-entities
+  // ! USE REACT-ENTITIES ?! https://www.npmjs.com/package/react-entities
   return (
     <HashRouter>
       <Switch>
         <SearchBarProvider value={{
           searchResults,
-          setSearchResults
+          setSearchResults,
+          textInput,
+          setTextInput,
+          submitForm
         }}>
           <PlayerSearchProvider value= {{
             userResults,

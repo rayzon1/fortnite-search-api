@@ -1,6 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import PlayerSearchContext from "../Components/Context/PlayerSearchContext";
 import PlayerSearchResults from "../Components/PlayerSearchResults";
+import styles from "../Modules/route_styles/player-route.module.css";
+import Paper from "@material-ui/core/Paper";
+import SearchBar from "../Components/SearchBar";
 
 export default function PlayerSearch() {
   const state = useContext(PlayerSearchContext);
@@ -15,7 +18,7 @@ export default function PlayerSearch() {
   } = state;
 
   useEffect(() => {
-    callPlayerSearchApi(apiSettings(users("Parkdood")));
+    callPlayerSearchApi(apiSettings(users("Tfue")));
 
     return function() {
       console.log("Effect unmounted");
@@ -30,5 +33,16 @@ export default function PlayerSearch() {
     };
   }, [userResults]);
 
-  return userResults.length > 0 && Object.keys(userId).length > 0 && <PlayerSearchResults userResults={userResults} userId={userId} />;
+  return (
+    <div>
+      <div className={styles.container}>
+        <Paper className={styles.paper}>
+          <h2>Player Search Page</h2>
+          <p>Search for a player to see their stats!</p>
+        </Paper>
+      </div>
+        <SearchBar />
+        {userResults.length > 0 && Object.keys(userId).length > 0 && <PlayerSearchResults userResults={userResults} userId={userId} />}
+    </div>
+    )
 }

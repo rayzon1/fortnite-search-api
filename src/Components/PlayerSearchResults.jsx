@@ -6,7 +6,7 @@ export default function PlayerSearchResults({ userResults, userId }) {
     console.log(userId);
     
     return (
-        
-        <h1>Player search page</h1>
+        <>
+        </>
     )
 }
