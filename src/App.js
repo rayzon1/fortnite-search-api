@@ -12,7 +12,7 @@ import authToken from './config';
 import axios from 'axios';
 import { UserProvider } from './Components/Context/index';
 import { PlayerSearchProvider } from './Components/Context/PlayerSearchContext';
-import { SearchBarProvider } from './Components/Context/SearchBarContext';
+import { SearchBarProvider } from './Components/Context/SearchBar/SearchBarContext';
 
 /**
  *  Main App to organize and structure all of my components.
@@ -24,10 +24,12 @@ function App() {
   const [newsResults, setNewsResults] = useState([]);
   const [weaponResults, setWeaponResults] = useState([]);
   const [searchResults, setSearchResults] = useState("");
+  const [playerSearchResults, setPlayerSearchResults] = useState("");
   const [textInput, setTextInput] = useState("");
   const [searchBarSubmit, setSearchBarSubmit] = useState(false);
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
+  const [hideImage, setHideImage] = useState(false);
   const [modalImage, setModalImage] = useState("");
   const upcoming = `https://fortnite-api.theapinetwork.com/upcoming/get?authorization=${authToken}`;
   const news = `https://fortnite-api.theapinetwork.com/br_motd/get?authorization=${authToken}`;
@@ -54,8 +56,12 @@ function App() {
     return `https://fortnite-api.theapinetwork.com/prod09/users/public/br_stats_v2?user_id=${uid}`;
   };
 
+  /**
+   * ! Unknown user will return if api does not bring back data
+   * Player search api call which will return and set the uid of the
+   * player searched.
+   */
   const callPlayerSearchApi = url => {
-
     return axios(url)
       .then(val => {
         if(Object.keys(val.data).length > 2){
@@ -65,10 +71,12 @@ function App() {
           let data1 = val.data.data.uid
           return setUserResults(data1);
         }
-           
       })
   }
 
+  /**
+   * Searchbar submit form function. 
+   */
   const submitForm = e => {
     e.preventDefault();
     setSearchBarSubmit(true);
@@ -77,14 +85,15 @@ function App() {
   const callPlayerSearchApi2 = url => {
     if (userResults.length > 0) {
       return axios(url).then(val => {
-        return setUserId(val.data);
-      }).catch(error => console.log("There was an error", error.code))
+        setUserId(val.data);
+      })
+      .catch(error => console.log("There was an error", error))
     }
   }
 
   /**
-   * This is the start of functions for other pages.
    * ! Home, Upcoming and Weapon search functions state.
+   * This is the start of functions for other pages.
    */
   const apiSettings = (url) => {
     var settings = {
@@ -99,7 +108,7 @@ function App() {
   }
   
   /**
-   * ! useEffect hook - Lifecycle method
+   * ! useEffect hook - Lifecycle method for main api call.
    * Primary api call to gather all data from the routes.
    */
   useEffect(() => {
@@ -107,15 +116,19 @@ function App() {
   }, [upcoming, news])
 
   /** 
-   * ! useEffect hook - Lifecycle method
-   * Searchbar use effect to change boolean value of search bar submission.
+   * ! useEffect hook - Lifecycle method to set search results from searchbar.
+   * Searchbar use effect to change boolean value of search bar submission
+   * and check if searchBarSubmit hook is true or false.
    */
   useEffect(() => {
     if(searchBarSubmit === true) {
       setSearchBarSubmit(false);
       return setSearchResults(textInput);
     }
-  }, [searchBarSubmit, textInput])
+    return function() {
+      setTextInput("");
+    }
+  }, [searchBarSubmit])
 
   /**
    * Main API call function for upcoming, news and weapons page.
@@ -134,11 +147,17 @@ function App() {
      }))
   }
 
+  /**
+   * Modal open image method
+   */
   const handleOpen = (image) => {
     setOpen(true);
     setModalImage(image);
   };
 
+  /**
+   * Modal close image method
+   */
   const handleClose = () => {
     setOpen(false);
     setModalImage("");
@@ -150,20 +169,29 @@ function App() {
     <HashRouter>
       <Switch>
         <SearchBarProvider value={{
-          searchResults,
-          setSearchResults,
           textInput,
           setTextInput,
-          submitForm
+          setHideImage,
+          hideImage,
+          submitForm,
+          searchResults,
+          setSearchResults
         }}>
           <PlayerSearchProvider value= {{
             userResults,
+            setUserResults,
             userId,
             users,
             getUserId,
             callPlayerSearchApi,
             apiSettings,
-            callPlayerSearchApi2
+            callPlayerSearchApi2,
+            searchBarSubmit,
+            playerSearchResults,
+            setPlayerSearchResults,
+            setSearchBarSubmit,
+            setUserId,
+            
           }}>
             <UserProvider value={{
               results,
@@ -178,6 +206,8 @@ function App() {
               modalImage,
               weaponResults,
               searchResults,
+              setHideImage,
+              hideImage
             }}>
               <div className="App">
                 <Header /> 

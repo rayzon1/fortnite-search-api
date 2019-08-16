@@ -25,7 +25,6 @@ const colorType = val => {
 /**
  * Function will determine the background color of the image container.
  * Color string will be added as an argument.
- * @param {string} color 
  */
 const weaponBackground = (color) => {
   return {
@@ -38,8 +37,6 @@ const weaponBackground = (color) => {
 
 /**
  * This component creates the frame for the weapon stats on the modal.
- * @param {string} stat 
- * @param {string} value 
  */
 const createWeaponStats = (stat, value) => {
   return (
@@ -55,7 +52,6 @@ const createWeaponStats = (stat, value) => {
 /**
  * This will change the color of the modal title depending on the 
  * rarity of the weapon.
- * @param {string} rarity 
  */
 const rarityNameStyle = (rarity) => {
     switch (rarity) {
@@ -88,7 +84,6 @@ const modalBackgroundColor =(rarity) => {
 /**
  * This is the actual modal component that will show upon clicking 
  * the weapon box.
- * @param {object} obj 
  */
 const weaponModal = obj => {
   return (
