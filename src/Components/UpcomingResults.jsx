@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Grid, Paper } from "@material-ui/core";
-import UserContext from "./Context/index";
+// import UserContext from "./Context/index";
 import Flip from "react-reveal/Flip";
 import ModalScreen from "./ModalScreen";
 import styles from "../Modules/component_styles/upcoming-results-comp.module.css";
@@ -10,9 +10,9 @@ import styles from "../Modules/component_styles/upcoming-results-comp.module.css
  * Will map images to grid with clickable results to bring up front a more detailed
  * description of the clicked item from api.
  */
-export default function UpcomingResults() {
-  const state = useContext(UserContext);
-  const { results, setValue, handleOpen } = state;
+export default function UpcomingResults({userProvider}) {
+  // const state = useContext(UserContext);
+  const { results, setValue, handleOpen } = userProvider;
  
   useEffect(() => {
     setValue(1);
@@ -37,7 +37,7 @@ export default function UpcomingResults() {
   return (    
     <div className={styles.container}>
       <Grid container direction="row" justify="center" alignItems="center" style={{ width: "91%"}}>
-        <ModalScreen />
+        <ModalScreen userProvider={userProvider}/>
         {results.data.data.map(val => (
           <Flip right key={val.itemId}>
             <div className={styles.imageContainer}>

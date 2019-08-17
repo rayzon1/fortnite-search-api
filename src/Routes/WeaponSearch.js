@@ -2,13 +2,13 @@ import React, { useEffect, useContext } from "react";
 import SearchBar from "../Components/SearchBar";
 import Paper from "@material-ui/core/Paper";
 import WeaponSearchResults from "../Components/WeaponSearchResults";
-import UserContext from "../Components/Context/index";
+// import UserContext from "../Components/Context/index";
 import fortnite_art_weapons from "../Static/fortnite_art_weapons.jpg";
 import styles from "../Modules/route_styles/weapon-search-route.module.css";
 
-export default function WeaponSearch() {
-  const state = useContext(UserContext);
-  const { setValue, searchResults, hideImage, setHideImage } = state;
+export default function WeaponSearch(props) {
+  // const state = useContext(UserContext);
+  const { setValue, searchResults, hideImage, setHideImage } = props.userProvider;
   const imageRef = React.createRef();
 
   //! escalate to app.js. Turn into a Boolean hook, with true or false for submit press.
@@ -40,14 +40,14 @@ export default function WeaponSearch() {
           <p className={styles.info}>Search for weapon keywords (assault rifle, shotgun, smg).</p>
         </Paper>
       </div>
-      <SearchBar />
+      <SearchBar searchProvider={props.searchProvider}/>
       <img
         src={fortnite_art_weapons}
         className={styles.images}
         ref={imageRef}
         alt="fortnite-art"
       />
-      <WeaponSearchResults searchResults={searchResults} />
+      <WeaponSearchResults searchResults={searchResults} userProvider={props.userProvider} />
     </div>
   );
 }

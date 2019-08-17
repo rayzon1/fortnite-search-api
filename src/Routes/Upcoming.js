@@ -5,7 +5,7 @@ import styles from "../Modules/route_styles/upcoming-route.module.css";
 
 // TODO: Set upcoming page with results from upcoming query.
 
-export default function Upcoming() {
+export default function Upcoming(props) {
   return (
     <div>
       <div className={styles.container}>
@@ -18,7 +18,7 @@ export default function Upcoming() {
         </Paper>
       </div>
       <br />
-      <UpcomingResults />
+      <UpcomingResults userProvider={props.userProvider} />
     </div>
   );
 }

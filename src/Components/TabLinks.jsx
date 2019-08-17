@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { withRouter } from "react-router-dom";
-import UserContext from "../Components/Context/index";
+// import UserContext from "../Components/Context/index";
 import $ from "jquery";
 
 /**
@@ -14,8 +14,8 @@ import $ from "jquery";
  */
 function TabLinks(props) {
   
-  const state = useContext(UserContext);
-  const { value, setValue } = state;
+  // const state = useContext(UserContext);
+  const { value, setValue } = props.userProvider;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

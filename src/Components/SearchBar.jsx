@@ -6,15 +6,16 @@ import {
   Fade
 } from "@material-ui/core";
 import styles from "../Modules/component_styles/searchbar-comp.module.css";
-import SearchBarContext from "./Context/SearchBar/SearchBarContext";
+// import SearchBarContext from "./Context/SearchBar/SearchBarContext";
 
 /**
  * Main Searchbar for homepage.
  * TODO: Add clear button to clear search field and reset results.
  */
-export default function SearchBar() {
-  const state = useContext(SearchBarContext);
-  const { submitForm, setTextInput, setHideImage } = state;
+export default function SearchBar({searchProvider}) {
+  // const state = useContext(SearchBarContext);
+  // const { submitForm, setTextInput, setHideImage } = state;
+  const { submitForm, setTextInput, setHideImage } = searchProvider;
 
   return (
     <form
