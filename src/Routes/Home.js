@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Paper } from "@material-ui/core";
 import { Fade } from "react-reveal";
-// import UserContext from "../Components/Context/index";
+import UserContext from "../Components/Context/index";
 import styles from "../Modules/route_styles/home-route.module.css";
 
 /**
@@ -9,9 +9,9 @@ import styles from "../Modules/route_styles/home-route.module.css";
  * TODO: Create layout for homepage, will route upon '/'.
  * TODO: Create information sections about Fortnite, and app functionality.
  */
-export default function Home(props) {
-  // const state = useContext(UserContext);
-  const { newsResults } = props;
+export default function Home() {
+  const state = useContext(UserContext);
+  const { newsResults } = state;
 
   return (
     <div className={styles.wrapper}> 

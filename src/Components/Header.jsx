@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import octocat from "../Static/Icons/Octocat.png";
 
-export default function Header(props) {
+export default function Header() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top" >
       <Navbar.Brand href="/">Fortnite API</Navbar.Brand>

@@ -5,19 +5,19 @@ import Paper from '@material-ui/core/Paper';
 
 
 
-export default function PlayerSearchResults({ userId }) {
-    // const state = useContext(PlayerSearchContext);
-    // const { userId } = state;
+export default function PlayerSearchResults() {
+    const state = useContext(PlayerSearchContext);
+    const { userId } = state;
     
     console.log(userId);
     const searchResultData = (obj) => {
         for (let [key, value] of Object.entries(obj.data.stats)) {
             if(value.length > 0) {
-                return value.map(val => (
+                return value.map((val, index) => (
                     val.friendlyName !== null &&
                     val.entries.length < 2 &&
-                    <>
-                        <Paper style={{width: '25%', height: 'auto'}}>
+                    <React.Fragment key={index}>
+                        <Paper style={{width: '25%', height: 'auto'}} key={index} >
                                 <h3>{val.friendlyName}</h3>
                                 {
                                     val.friendlyName !== null &&                            
@@ -31,7 +31,7 @@ export default function PlayerSearchResults({ userId }) {
                                     })
                                 }
                         </Paper><br />
-                    </>
+                    </React.Fragment>
             
                 ))
             } 

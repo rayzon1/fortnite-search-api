@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-// import UserContext from "./Context/index";
+import UserContext from "./Context/index";
 import ModalScreen from "./ModalScreen";
 import { Paper } from "@material-ui/core";
 import styles  from "../Modules/component_styles/weaponsearch-results-comp.module.css";
@@ -113,8 +113,9 @@ const weaponModal = obj => {
   );
 };
 
-export default function WeaponSearchresults({ searchResults, userProvider }) {
-  const { weaponResults, handleOpen } = userProvider;
+export default function WeaponSearchresults() {
+  const state = useContext(UserContext);
+  const { weaponResults, handleOpen, searchResults } = state;
 
   const mouseDown = key => {
     weaponResults[key].parentNode.style.boxShadow = "none";
@@ -126,7 +127,7 @@ export default function WeaponSearchresults({ searchResults, userProvider }) {
 
   return (
     <div className={styles.container}>
-      <ModalScreen userProvider={userProvider}/>
+      <ModalScreen />
       {weaponResults.data.data.entries.map(val => (
         <React.Fragment key={val.identifier}>
           {val.name.toLowerCase().includes(searchResults) &&

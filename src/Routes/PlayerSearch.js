@@ -5,7 +5,7 @@ import styles from "../Modules/route_styles/player-route.module.css";
 import Paper from "@material-ui/core/Paper";
 import SearchBar from "../Components/SearchBar";
 
-export default function PlayerSearch(props) {
+export default function PlayerSearch() {
   const context = useContext(PlayerSearchContext);
   const {
     userResults,
@@ -44,7 +44,7 @@ export default function PlayerSearch(props) {
           <p>Search for a player to see their stats!</p>
         </Paper>
       </div>
-        <SearchBar searchProvider={props.searchProvider} />
+        <SearchBar />
         {userResults.length > 0 && Object.keys(userId).length > 0 && <PlayerSearchResults userId={userId} />}
     </div>
     )
